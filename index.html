@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>VerityQA | Demo Videos</title>
+  <title>VerityQA | Demo Gallery</title>
 
   <style>
     :root {
@@ -14,7 +14,7 @@
       --border: #26323d;
       --text: #f1f5f9;
       --muted: #9aa8b7;
-      --info: #4ade80;
+      --green: #4ade80;
     }
 
     * {
@@ -35,33 +35,31 @@
       margin: auto;
     }
 
-    .header {
+    header {
       text-align: center;
       margin-bottom: 36px;
     }
 
-    .header h1 {
-      margin: 0 0 12px;
+    header h1 {
       font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 12px;
     }
 
-    .header h1 span {
-      color: var(--info);
+    header h1 span {
+      color: var(--green);
     }
 
-    .header p {
+    header p {
       color: var(--muted);
-      font-size: 15px;
       line-height: 1.7;
     }
 
     .status {
       display: inline-block;
-      margin-top: 10px;
-      padding: 7px 12px;
+      padding: 7px 13px;
       border: 1px solid #28583d;
       border-radius: 20px;
-      color: var(--info);
+      color: var(--green);
       font-size: 12px;
     }
 
@@ -77,11 +75,6 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       background: var(--card);
-      transition: border-color .2s;
-    }
-
-    .vcard:hover {
-      border-color: var(--info);
     }
 
     .frame {
@@ -106,14 +99,12 @@
       background-color: #101820;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
     }
 
     .vplay svg {
       width: 58px;
       height: 58px;
       transition: transform .2s;
-      filter: drop-shadow(0 2px 8px #0008);
     }
 
     .vplay:hover svg {
@@ -121,49 +112,29 @@
     }
 
     .vplay:focus-visible {
-      outline: 3px solid var(--info);
+      outline: 3px solid var(--green);
       outline-offset: -4px;
     }
 
     .frame iframe {
       position: absolute;
       inset: 0;
-      display: block;
       width: 100%;
       height: 100%;
       border: 0;
     }
 
     .vtitle {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
       padding: 16px;
-    }
-
-    .vtitle span {
       font-size: 14px;
       font-weight: 600;
     }
 
-    .vtitle a {
-      flex-shrink: 0;
-      color: var(--info);
-      font-size: 12px;
-      text-decoration: none;
-    }
-
-    .vtitle a:hover {
-      text-decoration: underline;
-    }
-
-    .footer {
-      padding: 30px 0 0;
+    footer {
+      padding-top: 30px;
       text-align: center;
       color: var(--muted);
       font-size: 12px;
-      line-height: 1.7;
     }
 
     @media (max-width: 900px) {
@@ -188,14 +159,13 @@
 <body>
   <main class="container">
 
-    <header class="header">
+    <header>
       <h1>Verity<span>QA</span> Demo Gallery</h1>
 
       <p>
-        Explore software testing projects, QA workflows,
-        automation demos and testing solutions.
+        Explore software testing, QA workflows and automation demos.
         <br>
-        Click any video to play it directly on this page.
+        Click the green play button to watch videos on this page.
       </p>
 
       <div class="status">● 8 Demo Videos</div>
@@ -204,17 +174,17 @@
     <section
       class="vgrid"
       id="vgrid"
-      aria-label="VerityQA demonstration videos">
+      aria-label="VerityQA demo videos">
     </section>
 
-    <footer class="footer">
+    <footer>
       VerityQA · Software Testing & Quality Assurance
     </footer>
 
   </main>
 
   <script>
-    // All 8 YouTube video IDs
+    // Your 8 YouTube video IDs
     const videoIds = [
       "TuwBpeZytlE",
       "e43E6OmatEc",
@@ -228,30 +198,29 @@
 
     const vgrid = document.getElementById("vgrid");
 
-    // Create the video cards
-    videoIds.forEach((id, i) => {
+    // Build video gallery
+    videoIds.forEach((id, index) => {
       const card = document.createElement("article");
       card.className = "vcard";
 
       const frame = document.createElement("div");
       frame.className = "frame";
 
-      const playButton = document.createElement("button");
-      playButton.type = "button";
-      playButton.className = "vplay";
-      playButton.dataset.id = id;
-      playButton.setAttribute(
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "vplay";
+      button.dataset.id = id;
+
+      button.setAttribute(
         "aria-label",
-        `Play VerityQA demo ${i + 1}`
+        `Play VerityQA demo ${index + 1}`
       );
 
-      // YouTube thumbnail
-      playButton.style.backgroundImage =
+      button.style.backgroundImage =
         `linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)), ` +
         `url("https://i.ytimg.com/vi/${id}/hqdefault.jpg")`;
 
-      // Green play icon
-      playButton.innerHTML = `
+      button.innerHTML = `
         <svg viewBox="0 0 52 52" aria-hidden="true">
           <circle
             cx="26"
@@ -261,6 +230,7 @@
             stroke="#4ADE80"
             stroke-width="2">
           </circle>
+
           <path
             d="M21 16 L37 26 L21 36 Z"
             fill="#4ADE80">
@@ -268,70 +238,75 @@
         </svg>
       `;
 
-      frame.appendChild(playButton);
+      frame.appendChild(button);
 
-      // Card title and optional external YouTube link
       const title = document.createElement("div");
       title.className = "vtitle";
+      title.textContent = `VerityQA Demo ${index + 1}`;
 
-      const label = document.createElement("span");
-      label.textContent = `VerityQA Demo ${i + 1}`;
-
-      const youtubeLink = document.createElement("a");
-      youtubeLink.href =
-        `https://www.youtube.com/watch?v=${id}`;
-      youtubeLink.target = "_blank";
-      youtubeLink.rel = "noopener noreferrer";
-      youtubeLink.textContent = "YouTube ↗";
-      youtubeLink.setAttribute(
-        "aria-label",
-        `Open VerityQA demo ${i + 1} on YouTube in a new tab`
-      );
-
-      title.append(label, youtubeLink);
       card.append(frame, title);
       vgrid.appendChild(card);
     });
 
-    // Stop previous video and restore its thumbnail
+    // Restore thumbnails and stop other videos
     function stopAllVideos() {
-      vgrid.querySelectorAll(".frame[data-playing='true']")
-        .forEach(frame => {
-          const button = frame.querySelector(".vplay");
+      const playingFrames = vgrid.querySelectorAll(
+        '.frame[data-playing="true"]'
+      );
 
-          if (button) {
-            frame.replaceChildren(button);
-          }
+      playingFrames.forEach(frame => {
+        const originalButton = frame._originalButton;
 
-          frame.removeAttribute("data-playing");
-        });
+        if (originalButton) {
+          frame.replaceChildren(originalButton);
+        }
+
+        delete frame._originalButton;
+        frame.removeAttribute("data-playing");
+      });
     }
 
-    // Play the video inside its existing card
-    vgrid.addEventListener("click", event => {
+    // Play video inside the same card
+    vgrid.addEventListener("click", function (event) {
       const button = event.target.closest(".vplay");
 
-      if (!button || !vgrid.contains(button)) return;
+      if (!button || !vgrid.contains(button)) {
+        return;
+      }
+
+      event.preventDefault();
 
       const videoId = button.dataset.id;
       const frame = button.closest(".frame");
 
-      // Only one video plays at a time
+      // Save thumbnail button before replacing it
+      const originalButton = button.cloneNode(true);
+
+      // Stop previously playing videos
       stopAllVideos();
 
       const iframe = document.createElement("iframe");
 
       iframe.src =
-        `https://www.youtube-nocookie.com/embed/${videoId}` +
-        "?autoplay=1&rel=0&playsinline=1";
+        "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(videoId) +
+        "?autoplay=1&playsinline=1&rel=0";
 
       iframe.title = button.getAttribute("aria-label");
-      iframe.allow =
-        "autoplay; encrypted-media; picture-in-picture; fullscreen";
-      iframe.allowFullscreen = true;
-      iframe.loading = "eager";
-      iframe.referrerPolicy = "strict-origin-when-cross-origin";
 
+      iframe.setAttribute(
+        "allow",
+        "autoplay; encrypted-media; picture-in-picture; fullscreen"
+      );
+
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.setAttribute("loading", "eager");
+      iframe.setAttribute(
+        "referrerpolicy",
+        "strict-origin-when-cross-origin"
+      );
+
+      frame._originalButton = originalButton;
       frame.dataset.playing = "true";
       frame.replaceChildren(iframe);
     });
