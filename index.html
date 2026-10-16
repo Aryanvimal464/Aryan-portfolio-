@@ -2,1219 +2,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#070a10" />
-  <meta name="description" content="VerityQA — Explore software testing, QA automation, API testing, and AI-powered quality engineering demos." />
-  <title>VerityQA | Quality Engineering Showcase</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VerityQA | Quality Beyond Testing</title>
+  <meta name="description" content="VerityQA — Software testing, automation and quality engineering portfolio.">
 
   <style>
     :root {
-      --bg: #070a10;
-      --panel: rgba(16, 23, 34, .78);
-      --panel-solid: #101722;
-      --text: #f4f7fb;
-      --muted: #929eaf;
-      --green: #b7ff5b;
-      --cyan: #4de8dc;
-      --border: rgba(255,255,255,.09);
-      --radius: 22px;
+      --bg: #070b14;
+      --panel: #101827;
+      --text: #f5f7ff;
+      --muted: #9aa8bd;
+      --green: #b8ff65;
+      --cyan: #5ee7f7;
+      --border: rgba(255,255,255,.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    html { scroll-behavior: smooth; }
 
     body {
-      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    button { font: inherit; }
-
-    .ambient {
+    .background-glow {
       position: fixed;
       inset: 0;
-      overflow: hidden;
       pointer-events: none;
-      z-index: -2;
-      background:
-        radial-gradient(ellipse at 15% 5%, rgba(76,232,220,.09), transparent 36%),
-        radial-gradient(ellipse at 85% 20%, rgba(183,255,91,.08), transparent 34%),
-        radial-gradient(ellipse at 50% 85%, rgba(78,91,200,.08), transparent 40%);
-    }
-
-    .ambient::before, .ambient::after {
-      content: "";
-      position: absolute;
-      width: 450px;
-      height: 450px;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: .13;
-      animation: float 14s ease-in-out infinite alternate;
-    }
-
-    .ambient::before { background: var(--cyan); top: 8%; left: -250px; }
-    .ambient::after { background: var(--green); right: -250px; top: 45%; animation-delay: -7s; }
-
-    .grid-overlay {
-      position: fixed;
-      inset: 0;
       z-index: -1;
-      pointer-events: none;
-      opacity: .14;
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      background:
+        radial-gradient(ellipse at 15% 10%, #163b3738, transparent 40%),
+        radial-gradient(ellipse at 85% 35%, #263d7430, transparent 40%);
     }
 
-    @keyframes float {
-      from { transform: translate(0, 0) scale(1); }
-      to { transform: translate(70px, -55px) scale(1.2); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(183,255,91,.25); }
-      50% { box-shadow: 0 0 0 7px rgba(183,255,91,0); }
-    }
-
-    @keyframes shine {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
-    }
-
-    .container { width: min(1160px, calc(100% - 40px)); margin: auto; }
-
-    /* Navigation */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(7,10,16,.82);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      backdrop-filter: blur(20px);
-    }
-
-    .nav-inner {
-      min-height: 76px;
+      z-index: 50;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: flex;
       align-items: center;
-      gap: 11px;
-      font: 700 22px 'Space Grotesk', sans-serif;
-      letter-spacing: -.8px;
+      padding: 17px 7%;
+      background: rgba(7,11,20,.82);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
     }
 
-    .brand-icon {
-      display: grid;
-      place-items: center;
-      width: 38px;
-      height: 38px;
-      color: #101710;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--green), var(--cyan));
-      font-size: 20px;
-      box-shadow: 0 0 25px rgba(183,255,91,.15);
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
     }
 
-    .brand span span { color: var(--green); }
+    .logo span { color: var(--green); }
 
-    .nav-links { display: flex; align-items: center; gap: 28px; }
-
-    .nav-links a {
-      color: #b6bfcc;
-      font-size: 13px;
-      font-weight: 600;
-      transition: color .2s;
+    .nav-links {
+      display: flex;
+      gap: 27px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .nav-links a:hover { color: var(--green); }
 
-    .nav-cta {
-      border: 1px solid rgba(183,255,91,.38);
-      padding: 10px 16px;
-      border-radius: 10px;
-      color: var(--green) !important;
-      background: rgba(183,255,91,.05);
-    }
-
-    .menu-toggle {
-      display: none;
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 19px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      color: var(--text);
-      background: var(--panel);
-      padding: 8px 12px;
-      border-radius: 10px;
+      font-weight: 750;
+      transition: .25s;
       cursor: pointer;
     }
 
-    /* Hero */
+    .button-primary {
+      color: #0b1110;
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px #b8ff6522;
+    }
+
     .hero {
-      position: relative;
-      padding: 105px 0 76px;
-      text-align: center;
+      min-height: 83vh;
+      padding: 100px 7% 75px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 50px;
+      align-items: center;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 8px 13px;
-      border: 1px solid rgba(183,255,91,.2);
+      padding: 7px 13px;
+      border: 1px solid #b8ff6540;
+      background: #b8ff650b;
+      color: var(--green);
       border-radius: 100px;
-      color: #c9e9a5;
-      background: rgba(183,255,91,.055);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.3px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 800;
       text-transform: uppercase;
     }
 
-    .status-dot {
+    .dot {
       width: 7px;
       height: 7px;
-      background: var(--green);
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
     }
 
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
-
-    .hero h1 {
-      max-width: 900px;
-      margin: 26px auto 20px;
-      font-size: clamp(42px, 7.2vw, 82px);
-      line-height: 1.06;
-      letter-spacing: -4px;
-      font-weight: 700;
+    h1 {
+      margin: 23px 0;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -3px;
     }
 
     .gradient-text {
-      color: var(--green);
-      background: linear-gradient(100deg, var(--green), var(--cyan), var(--green));
-      background-size: 200% auto;
+      background: linear-gradient(100deg, var(--green), var(--cyan));
       -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shine 6s linear infinite;
+      color: transparent;
     }
 
-    .hero-description {
-      max-width: 680px;
-      margin: 0 auto;
+    .hero p {
+      max-width: 580px;
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.9;
+      font-size: 17px;
+      margin-bottom: 28px;
     }
 
-    .hero-actions {
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+
+    .hero-visual {
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+      perspective: 1000px;
+    }
+
+    .orbit-card {
+      width: min(100%, 380px);
+      aspect-ratio: 1 / 1;
+      padding: 27px;
+      border-radius: 30px;
+      border: 1px solid #ffffff1a;
+      background: linear-gradient(145deg, #172536, #0b111d 65%);
+      box-shadow: 0 30px 100px #0008, inset 0 1px #ffffff18;
+      transform-style: preserve-3d;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateY(-7deg) rotateX(4deg); }
+      50% { transform: translateY(-15px) rotateY(7deg) rotateX(-2deg); }
+    }
+
+    .terminal-top { display: flex; gap: 7px; margin-bottom: 28px; }
+    .terminal-top span { width: 9px; height: 9px; border-radius: 50%; background: #526174; }
+    .terminal-top span:first-child { background: #ff6b78; }
+    .terminal-top span:nth-child(2) { background: #ffcc66; }
+    .terminal-top span:nth-child(3) { background: var(--green); }
+
+    .check-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      color: var(--green);
+      background: #b8ff6512;
+      border: 1px solid #b8ff6540;
+      margin-bottom: 20px;
+    }
+
+    .status-line {
+      margin-top: 16px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 13px 19px;
-      border-radius: 12px;
+      justify-content: space-between;
+      color: var(--muted);
       font-size: 13px;
-      font-weight: 700;
-      transition: transform .25s, box-shadow .25s, border-color .25s;
     }
 
-    .btn:hover { transform: translateY(-3px); }
-
-    .btn-primary {
-      color: #10160b;
-      background: linear-gradient(110deg, var(--green), #d6ff9e);
-      box-shadow: 0 8px 28px rgba(183,255,91,.13);
+    .progress {
+      height: 7px;
+      border-radius: 10px;
+      margin-top: 9px;
+      background: #273345;
+      overflow: hidden;
     }
 
-    .btn-primary:hover { box-shadow: 0 12px 36px rgba(183,255,91,.24); }
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 92%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+    }
 
-    .btn-secondary {
+    .floating-tag {
+      display: inline-block;
+      margin-top: 20px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.035);
-      color: #e5ebf4;
-    }
-
-    .btn-secondary:hover { border-color: rgba(77,232,220,.45); }
-
-    .hero-meta {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      margin-top: 34px;
-      color: #8e9aab;
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: #111b2b;
+      color: var(--green);
       font-size: 12px;
     }
 
-    .hero-meta span { display: flex; align-items: center; gap: 7px; }
-    .check { color: var(--green); font-weight: 800; }
+    section { padding: 80px 7%; }
 
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      background: rgba(255,255,255,.025);
-      margin-bottom: 100px;
-    }
-
-    .stat {
-      text-align: center;
-      padding: 25px 12px;
-      border-right: 1px solid var(--border);
-    }
-
-    .stat:last-child { border-right: none; }
-
-    .stat-number {
-      font: 700 30px 'Space Grotesk', sans-serif;
-      color: var(--green);
-      letter-spacing: -1px;
-    }
-
-    .stat-label { color: var(--muted); font-size: 12px; margin-top: 3px; }
-
-    /* Shared sections */
-    section { scroll-margin-top: 100px; }
-
-    .section-heading { margin-bottom: 35px; }
-
-    .section-kicker {
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.7px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 38px;
     }
 
     .section-heading h2 {
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.2;
-      letter-spacing: -1.6px;
-      margin-bottom: 12px;
+      font-size: clamp(30px, 4vw, 47px);
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin: 14px 0;
     }
 
-    .section-heading p { color: var(--muted); font-size: 14px; max-width: 650px; }
+    .section-heading p { color: var(--muted); }
 
-    .section-heading.center { text-align: center; }
-    .section-heading.center p { margin-inline: auto; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      padding-top: 0;
+    }
 
-    /* Videos */
-    .videos-section { padding: 10px 0 100px; }
+    .stat-card, .feature-card, .video-card, .step-card {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #121c2c, #0b111c);
+      border-radius: 20px;
+      transition: transform .3s, border-color .3s;
+    }
+
+    .stat-card { padding: 25px; }
+    .stat-card strong { display: block; font-size: 30px; color: var(--green); }
+    .stat-card span { color: var(--muted); font-size: 13px; }
 
     .video-toolbar {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 26px;
+      margin-bottom: 25px;
     }
-
-    .filter-list { display: flex; gap: 8px; flex-wrap: wrap; }
 
     .filter-btn {
-      padding: 9px 14px;
-      border-radius: 9px;
+      padding: 9px 15px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.025);
-      color: #a8b2c1;
-      font-size: 12px;
-      font-weight: 600;
+      background: #101827;
+      color: var(--muted);
+      border-radius: 100px;
       cursor: pointer;
-      transition: .2s;
     }
 
-    .filter-btn:hover, .filter-btn.active {
+    .filter-btn.active, .filter-btn:hover {
       color: var(--green);
-      border-color: rgba(183,255,91,.35);
-      background: rgba(183,255,91,.075);
+      border-color: #b8ff6566;
     }
-
-    .video-count { color: var(--muted); font-size: 12px; }
 
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 22px;
-      perspective: 1200px;
     }
 
     .video-card {
-      min-width: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
       overflow: hidden;
-      background: linear-gradient(145deg, rgba(21,30,43,.95), rgba(11,16,25,.96));
       transform-style: preserve-3d;
-      transition: transform .3s ease, border-color .3s, box-shadow .3s;
     }
 
-    .video-card:hover {
-      border-color: rgba(183,255,91,.35);
-      box-shadow: 0 20px 55px rgba(0,0,0,.3), 0 0 25px rgba(183,255,91,.04);
+    .video-card:hover, .feature-card:hover, .step-card:hover, .stat-card:hover {
+      transform: translateY(-6px);
+      border-color: #b8ff6555;
     }
 
     .video-frame {
-      position: relative;
-      width: 100%;
       aspect-ratio: 16 / 9;
-      background: #080c13;
+      background: #05080e;
+      position: relative;
       overflow: hidden;
     }
 
     .video-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
       display: block;
+    }
+
+    .video-cover {
       width: 100%;
       height: 100%;
       position: absolute;
       inset: 0;
-      border: 0;
-    }
-
-    .video-placeholder {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
       cursor: pointer;
-      border: 0;
-      width: 100%;
-      color: white;
       background:
-        radial-gradient(ellipse at 50% 45%, rgba(77,232,220,.12), transparent 45%),
-        linear-gradient(135deg, #111c27, #090e16);
-      transition: opacity .25s;
+        linear-gradient(0deg, #03060bd9, #03060b20),
+        radial-gradient(circle at center, #244b4c, #111c2e 65%, #080c14);
     }
 
-    .video-placeholder::before {
+    .video-cover::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      opacity: .22;
+      background-image: linear-gradient(#ffffff12 1px, transparent 1px),
+                        linear-gradient(90deg, #ffffff12 1px, transparent 1px);
       background-size: 25px 25px;
-      opacity: .5;
     }
 
-    .play-circle {
+    .play-button {
       position: relative;
       z-index: 1;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      color: #11170b;
-      background: linear-gradient(135deg, var(--green), var(--cyan));
-      box-shadow: 0 0 35px rgba(77,232,220,.23);
-      transition: transform .3s, box-shadow .3s;
+      padding-left: 5px;
+      color: #09110b;
+      background: var(--green);
+      font-size: 27px;
+      box-shadow: 0 0 45px #b8ff6545;
+      transition: transform .2s;
     }
 
-    .play-circle svg { width: 21px; height: 21px; margin-left: 3px; }
+    .video-cover:hover .play-button { transform: scale(1.12); }
 
-    .video-placeholder:hover .play-circle {
-      transform: scale(1.13);
-      box-shadow: 0 0 45px rgba(183,255,91,.4);
-    }
+    .video-info { padding: 20px; }
+    .video-info small { color: var(--green); font-weight: 800; letter-spacing: .7px; }
+    .video-info h3 { margin: 8px 0; font-size: 20px; }
+    .video-info p { color: var(--muted); font-size: 14px; }
 
-    .placeholder-label {
-      position: absolute;
-      bottom: 15px;
-      z-index: 1;
-      font-size: 10px;
-      color: #aab9c8;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .video-content { padding: 19px 19px 20px; }
-
-    .video-topline {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .video-tag {
-      display: inline-block;
-      color: var(--cyan);
-      background: rgba(77,232,220,.08);
-      border: 1px solid rgba(77,232,220,.14);
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 9px;
-      letter-spacing: .8px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .video-index { color: #657184; font-size: 11px; font-weight: 700; }
-
-    .video-content h3 { font-size: 17px; line-height: 1.4; margin-bottom: 9px; }
-
-    .video-content p { color: var(--muted); font-size: 12px; line-height: 1.8; min-height: 44px; }
-
-    .video-footer {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.07);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #91a0b2;
-      font-size: 11px;
-    }
-
-    .watch-label { color: var(--green); font-weight: 700; }
-
-    .video-card[hidden] { display: none !important; }
-
-    /* Features */
-    .features-section { padding: 85px 0 100px; border-top: 1px solid rgba(255,255,255,.06); }
-
-    .features-grid {
+    .feature-grid, .steps-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
-    .feature-card {
-      position: relative;
-      padding: 27px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(255,255,255,.025);
-      transition: transform .25s, border-color .25s, background .25s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(77,232,220,.27);
-      background: rgba(77,232,220,.035);
-    }
-
-    .feature-icon {
-      width: 45px;
-      height: 45px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 19px;
-      border-radius: 13px;
-      color: var(--green);
-      background: rgba(183,255,91,.08);
-      border: 1px solid rgba(183,255,91,.12);
-      font-size: 21px;
-    }
-
-    .feature-card h3 { font-size: 17px; margin-bottom: 9px; }
-    .feature-card p { color: var(--muted); font-size: 12px; line-height: 1.9; }
-
-    /* Workflow */
-    .workflow-section { padding: 85px 0 100px; border-top: 1px solid rgba(255,255,255,.06); }
-
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: 14px;
-    }
-
-    .workflow-step {
-      position: relative;
-      padding: 24px 20px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: rgba(255,255,255,.025);
-    }
-
-    .step-number {
-      color: var(--green);
-      font: 700 13px 'Space Grotesk', sans-serif;
-      letter-spacing: 1px;
-      margin-bottom: 19px;
-    }
-
-    .workflow-step h3 { font-size: 15px; margin-bottom: 8px; }
-    .workflow-step p { color: var(--muted); font-size: 12px; line-height: 1.8; }
-
-    /* About / CTA */
-    .about-section { padding: 85px 0 110px; border-top: 1px solid rgba(255,255,255,.06); }
+    .feature-card, .step-card { padding: 25px; }
+    .feature-icon { font-size: 28px; margin-bottom: 15px; }
+    .feature-card h3, .step-card h3 { margin-bottom: 9px; }
+    .feature-card p, .step-card p { color: var(--muted); font-size: 14px; }
 
     .about-panel {
-      position: relative;
-      padding: 52px;
-      border: 1px solid rgba(183,255,91,.18);
-      border-radius: 25px;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(77,232,220,.1), transparent 45%),
-        radial-gradient(ellipse at 0% 100%, rgba(183,255,91,.08), transparent 40%),
-        rgba(255,255,255,.025);
-    }
-
-    .about-panel h2 {
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.2;
-      letter-spacing: -1.5px;
-      max-width: 720px;
-      margin-bottom: 16px;
-    }
-
-    .about-panel p { max-width: 700px; color: var(--muted); font-size: 14px; line-height: 1.9; }
-
-    .about-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 22px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-
-    .about-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-
-    .about-pills span {
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: #c0cbd8;
-      font-size: 11px;
-    }
-
-    /* Footer */
-    footer { border-top: 1px solid var(--border); padding: 28px 0; }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand { font: 700 16px 'Space Grotesk', sans-serif; }
-    .footer-brand span { color: var(--green); }
-    .footer-note { color: #788598; font-size: 11px; }
-    .footer-links { display: flex; gap: 18px; color: #a4afbf; font-size: 12px; }
-    .footer-links a:hover { color: var(--green); }
-
-    .back-top {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      z-index: 50;
+      padding: 38px;
       display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(183,255,91,.28);
-      border-radius: 13px;
-      background: rgba(12,18,25,.9);
-      color: var(--green);
-      cursor: pointer;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: linear-gradient(120deg, #152437, #0b111c);
+    }
+
+    .about-panel h2 { font-size: 35px; line-height: 1.2; }
+    .about-panel p { color: var(--muted); margin-top: 12px; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 10px; align-content: center; }
+    .skill-list span {
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: #d9e4f3;
+      background: #ffffff05;
+      font-size: 13px;
+    }
+
+    .contact-panel {
+      text-align: center;
+      padding: 55px 25px;
+      border: 1px solid #b8ff6530;
+      border-radius: 26px;
+      background: radial-gradient(ellipse at top, #b8ff6510, transparent 65%), #0d1421;
+    }
+
+    .contact-panel h2 { font-size: clamp(30px, 4vw, 45px); margin: 15px 0; }
+    .contact-panel p { color: var(--muted); margin: 0 auto 25px; max-width: 600px; }
+
+    footer {
+      padding: 25px 7%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .reveal {
       opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px);
-      transition: .25s;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
     }
 
-    .back-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
-    .reveal.in-view { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 950px) {
-      .video-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .features-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .workflow-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .hero { padding-top: 85px; }
-      .hero h1 { letter-spacing: -2.5px; }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; padding-top: 75px; }
+      .hero-visual { min-height: 300px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-panel { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 680px) {
-      .container { width: min(100% - 28px, 520px); }
-      .nav-inner { min-height: 67px; }
-      .brand { font-size: 19px; }
-      .menu-toggle { display: inline-block; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        left: 14px;
-        right: 14px;
-        top: 72px;
-        padding: 17px;
-        border: 1px solid var(--border);
-        border-radius: 15px;
-        background: #0d131d;
-        align-items: stretch;
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 8px; }
-      .nav-cta { text-align: center; margin-top: 6px; }
-
-      .hero { padding: 70px 0 55px; }
-      .hero h1 { font-size: clamp(39px, 11vw, 58px); letter-spacing: -2px; }
-      .hero-description { font-size: 14px; }
-      .hero-meta { gap: 12px 18px; font-size: 11px; }
-      .stats { grid-template-columns: repeat(2,1fr); margin-bottom: 70px; }
-      .stat:nth-child(2) { border-right: none; }
-      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-      .stat-number { font-size: 26px; }
-
-      .video-grid, .features-grid, .workflow-grid { grid-template-columns: 1fr; }
-      .video-grid { gap: 18px; }
-      .video-content p { min-height: 0; }
-      .videos-section, .features-section, .workflow-section { padding-bottom: 70px; }
-      .video-toolbar { align-items: flex-start; }
-      .about-section { padding: 65px 0 75px; }
-      .about-panel { padding: 27px 22px; }
-      .section-heading h2 { letter-spacing: -1px; }
-      .footer-inner { align-items: flex-start; flex-direction: column; }
+    @media (max-width: 600px) {
+      .navbar { padding: 14px 5%; }
+      .nav-links { gap: 13px; font-size: 12px; }
+      .nav-links .nav-optional { display: none; }
+      .hero, section { padding-left: 5%; padding-right: 5%; }
+      h1 { letter-spacing: -2px; }
+      .video-grid, .feature-grid, .steps-grid { grid-template-columns: 1fr; }
+      .stats { gap: 10px; }
+      .stat-card { padding: 17px; }
+      .stat-card strong { font-size: 25px; }
+      .about-panel { padding: 25px; }
+      footer { padding: 22px 5%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
         transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
       }
-      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 
 <body>
-  <div class="ambient" aria-hidden="true"></div>
-  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="background-glow"></div>
 
   <header class="navbar">
-    <div class="container nav-inner">
-      <a class="brand" href="#home" aria-label="VerityQA home">
-        <span class="brand-icon">✓</span>
-        <span>Verity<span>QA</span></span>
-      </a>
+    <a class="logo" href="#home">Verity<span>QA.</span></a>
 
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">
-        ☰ Menu
-      </button>
-
-      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#demos">Video Demos</a>
-        <a href="#features">Capabilities</a>
-        <a href="#workflow">QA Workflow</a>
-        <a class="nav-cta" href="#about">Explore Portfolio ↗</a>
-      </nav>
-    </div>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#videos">Videos</a>
+      <a class="nav-optional" href="#services">Services</a>
+      <a class="nav-optional" href="#about">About</a>
+      <a class="button button-primary" href="#contact">Let's Talk ↗</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="container">
-        <div class="eyebrow"><span class="status-dot"></span> Quality Engineering Showcase</div>
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span> Quality Engineering Portfolio</div>
 
-        <h1>
-          Testing smarter.<br>
-          Delivering <span class="gradient-text">better software.</span>
-        </h1>
+        <h1>Quality is not a step.<br>It's the <span class="gradient-text">standard.</span></h1>
 
-        <p class="hero-description">
-          Welcome to VerityQA — an interactive showcase of software quality assurance,
-          manual testing, automation, API validation, and AI-powered testing workflows.
-          Explore the demos and see quality engineering in action.
+        <p>
+          Exploring software testing, Selenium automation, API validation
+          and AI-powered quality engineering — one test at a time.
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#demos">▶ Explore Video Demos</a>
-          <a class="btn btn-secondary" href="#features">Discover Capabilities ↘</a>
+          <a class="button button-primary" href="#videos">▶ Watch Demos</a>
+          <a class="button" href="#services">Explore Work ↘</a>
         </div>
+      </div>
 
-        <div class="hero-meta">
-          <span><span class="check">✓</span> Manual & Automation Testing</span>
-          <span><span class="check">✓</span> Web & API Testing</span>
-          <span><span class="check">✓</span> AI-Assisted QA</span>
+      <div class="hero-visual reveal">
+        <div class="orbit-card" id="tilt-card">
+          <div class="terminal-top"><span></span><span></span><span></span></div>
+          <div class="check-icon">✓</div>
+          <div class="eyebrow">System status: healthy</div>
+          <h2 style="margin-top:15px;font-size:29px">Quality Control</h2>
+          <p style="color:var(--muted);margin-top:8px">Automate. Validate. Deliver.</p>
+
+          <div class="status-line"><span>Test coverage indicator</span><strong>92%</strong></div>
+          <div class="progress"><span></span></div>
+
+          <div class="floating-tag">✦ AI-assisted QA</div>
+          <div class="floating-tag">⌘ Automation ready</div>
         </div>
       </div>
     </section>
 
-    <div class="container">
-      <div class="stats reveal">
-        <div class="stat">
-          <div class="stat-number" data-count="8">8</div>
-          <div class="stat-label">Video Demonstrations</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">QA</div>
-          <div class="stat-label">Quality First Approach</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">Web</div>
-          <div class="stat-label">Browser-Based Demos</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">AI+</div>
-          <div class="stat-label">Modern Testing Concepts</div>
-        </div>
+    <section class="stats reveal">
+      <div class="stat-card"><strong>QA</strong><span>Quality Assurance</span></div>
+      <div class="stat-card"><strong>UI</strong><span>Web UI Automation</span></div>
+      <div class="stat-card"><strong>API</strong><span>API Testing</span></div>
+      <div class="stat-card"><strong>AI</strong><span>Intelligent QA Workflows</span></div>
+    </section>
+
+    <section id="videos">
+      <div class="section-heading reveal">
+        <div class="eyebrow">Watch & Explore</div>
+        <h2>Work that speaks <span class="gradient-text">for itself.</span></h2>
+        <p>Choose a demo below. Videos play directly inside this website.</p>
       </div>
-    </div>
 
-    <section class="videos-section" id="demos">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-kicker">Explore the work</div>
-          <h2>QA demos, <span class="gradient-text">in action.</span></h2>
-          <p>Watch the demonstrations directly on this page. Choose a category to find the content you're interested in.</p>
-        </div>
+      <div class="video-toolbar reveal" id="video-filters">
+        <button class="filter-btn active" data-filter="all">All Demos</button>
+        <button class="filter-btn" data-filter="automation">Automation</button>
+        <button class="filter-btn" data-filter="manual">Manual Testing</button>
+        <button class="filter-btn" data-filter="ai">AI & Projects</button>
+      </div>
 
-        <div class="video-toolbar reveal">
-          <div class="filter-list" role="group" aria-label="Filter videos">
-            <button class="filter-btn active" data-filter="all" aria-pressed="true">All demos</button>
-            <button class="filter-btn" data-filter="automation" aria-pressed="false">Automation</button>
-            <button class="filter-btn" data-filter="manual" aria-pressed="false">Manual QA</button>
-            <button class="filter-btn" data-filter="ai" aria-pressed="false">AI & Tools</button>
+      <div class="video-grid" id="video-grid">
+        <article class="video-card reveal" data-category="automation">
+          <div class="video-frame" data-video="TuwBpeZytlE" data-title="Selenium Python E-commerce Automation">
+            <button class="video-cover" aria-label="Play Selenium Python E-commerce Automation video">
+              <span class="play-button">▶</span>
+            </button>
           </div>
-          <div class="video-count" id="videoCount">Showing 8 demonstrations</div>
-        </div>
+          <div class="video-info">
+            <small>01 / AUTOMATION</small>
+            <h3>Selenium Python E-commerce Automation</h3>
+            <p>Browser automation and end-to-end testing demo.</p>
+          </div>
+        </article>
 
-        <div class="video-grid" id="videoGrid">
+        <article class="video-card reveal" data-category="ai">
+          <div class="video-frame" data-video="e43E6OmatEc" data-title="AI Bug Triage Agent">
+            <button class="video-cover" aria-label="Play AI Bug Triage Agent video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>02 / AI PROJECT</small>
+            <h3>AI Bug Triage Agent</h3>
+            <p>Exploring AI-assisted bug classification and reporting.</p>
+          </div>
+        </article>
 
-          <!-- Video 1 -->
-          <article class="video-card reveal" data-category="automation">
-            <div class="video-frame" data-video-id="TuwBpeZytlE" data-title="QA Demo 01">
-              <button class="video-placeholder" aria-label="Play QA Demo 01">
-                <span class="play-circle">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                </span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">Automation</span><span class="video-index">DEMO 01</span></div>
-              <h3>QA Automation Demo</h3>
-              <p>Explore a practical software testing demonstration and observe the workflow in action.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
+        <article class="video-card reveal" data-category="manual">
+          <div class="video-frame" data-video="iJoxy4RzxSo" data-title="Manual Testing Demo">
+            <button class="video-cover" aria-label="Play Manual Testing Demo video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>03 / MANUAL QA</small>
+            <h3>Manual Testing Demo</h3>
+            <p>Review the testing workflow and validation process.</p>
+          </div>
+        </article>
 
-          <!-- Video 2 -->
-          <article class="video-card reveal" data-category="manual">
-            <div class="video-frame" data-video-id="e43E6OmatEc" data-title="QA Demo 02">
-              <button class="video-placeholder" aria-label="Play QA Demo 02">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">Manual QA</span><span class="video-index">DEMO 02</span></div>
-              <h3>Manual Testing Walkthrough</h3>
-              <p>See a testing walkthrough focused on validating application behaviour and user flows.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
+        <article class="video-card reveal" data-category="automation">
+          <div class="video-frame" data-video="nDYWyJyyWeQ" data-title="Test Automation Workflow">
+            <button class="video-cover" aria-label="Play Test Automation Workflow video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>04 / AUTOMATION</small>
+            <h3>Test Automation Workflow</h3>
+            <p>Automation concepts and practical test execution.</p>
+          </div>
+        </article>
 
-          <!-- Video 3 -->
-          <article class="video-card reveal" data-category="automation">
-            <div class="video-frame" data-video-id="iJoxy4RzxSo" data-title="QA Demo 03">
-              <button class="video-placeholder" aria-label="Play QA Demo 03">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">Automation</span><span class="video-index">DEMO 03</span></div>
-              <h3>Automated Test Execution</h3>
-              <p>A closer look at test automation concepts and repeatable testing workflows.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
+        <article class="video-card reveal" data-category="manual">
+          <div class="video-frame" data-video="KyEZyFgqMvg" data-title="Test Cases and Bug Reporting">
+            <button class="video-cover" aria-label="Play Test Cases and Bug Reporting video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>05 / TEST DESIGN</small>
+            <h3>Test Cases & Bug Reporting</h3>
+            <p>Test documentation, scenarios and defect reporting.</p>
+          </div>
+        </article>
 
-          <!-- Video 4 -->
-          <article class="video-card reveal" data-category="manual">
-            <div class="video-frame" data-video-id="nDYWyJyyWeQ" data-title="QA Demo 04">
-              <button class="video-placeholder" aria-label="Play QA Demo 04">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">Manual QA</span><span class="video-index">DEMO 04</span></div>
-              <h3>Test Scenarios & Validation</h3>
-              <p>Review application scenarios and the process of checking expected results against actual behaviour.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
+        <article class="video-card reveal" data-category="ai">
+          <div class="video-frame" data-video="-h6eB82C5-4" data-title="QA Dashboard Project">
+            <button class="video-cover" aria-label="Play QA Dashboard Project video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>06 / QA PROJECT</small>
+            <h3>QA Dashboard Project</h3>
+            <p>A closer look at QA dashboard and project workflows.</p>
+          </div>
+        </article>
 
-          <!-- Video 5 -->
-          <article class="video-card reveal" data-category="automation">
-            <div class="video-frame" data-video-id="KyEZyFgqMvg" data-title="QA Demo 05">
-              <button class="video-placeholder" aria-label="Play QA Demo 05">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">Automation</span><span class="video-index">DEMO 05</span></div>
-              <h3>Browser Testing Workflow</h3>
-              <p>Explore a browser-based testing workflow and how automation can support repeatable checks.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
+        <article class="video-card reveal" data-category="automation">
+          <div class="video-frame" data-video="79KJHzfvYEU" data-title="API Testing Project">
+            <button class="video-cover" aria-label="Play API Testing Project video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>07 / API TESTING</small>
+            <h3>API Testing Project</h3>
+            <p>Explore API testing and response validation.</p>
+          </div>
+        </article>
 
-          <!-- Video 6 -->
-          <article class="video-card reveal" data-category="ai">
-            <div class="video-frame" data-video-id="-h6eB82C5-4" data-title="QA Demo 06">
-              <button class="video-placeholder" aria-label="Play QA Demo 06">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">AI & Tools</span><span class="video-index">DEMO 06</span></div>
-              <h3>AI-Assisted QA Demo</h3>
-              <p>Discover how AI-assisted concepts can support testing activities and quality workflows.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
-
-          <!-- Video 7 -->
-          <article class="video-card reveal" data-category="ai">
-            <div class="video-frame" data-video-id="79KJHzfvYEU" data-title="QA Demo 07">
-              <button class="video-placeholder" aria-label="Play QA Demo 07">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">AI & Tools</span><span class="video-index">DEMO 07</span></div>
-              <h3>QA Tools & Workflow</h3>
-              <p>View another practical demo showcasing software quality tools and testing practices.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
-
-          <!-- Video 8 -->
-          <article class="video-card reveal" data-category="automation">
-            <div class="video-frame" data-video-id="WB4icMZTbPM" data-title="QA Demo 08">
-              <button class="video-placeholder" aria-label="Play QA Demo 08">
-                <span class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-                <span class="placeholder-label">▶ Play demonstration</span>
-              </button>
-            </div>
-            <div class="video-content">
-              <div class="video-topline"><span class="video-tag">Automation</span><span class="video-index">DEMO 08</span></div>
-              <h3>End-to-End QA Showcase</h3>
-              <p>Explore the final video in this collection of testing and quality engineering demonstrations.</p>
-              <div class="video-footer"><span>Video demonstration</span><span class="watch-label">Watch here ↗</span></div>
-            </div>
-          </article>
-
-        </div>
+        <article class="video-card reveal" data-category="ai">
+          <div class="video-frame" data-video="WB4icMZTbPM" data-title="QA Portfolio Walkthrough">
+            <button class="video-cover" aria-label="Play QA Portfolio Walkthrough video">
+              <span class="play-button">▶</span>
+            </button>
+          </div>
+          <div class="video-info">
+            <small>08 / PORTFOLIO</small>
+            <h3>QA Portfolio Walkthrough</h3>
+            <p>Discover projects, tools and testing demonstrations.</p>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="features-section" id="features">
-      <div class="container">
-        <div class="section-heading center reveal">
-          <div class="section-kicker">Quality engineering</div>
-          <h2>Built around <span class="gradient-text">better quality.</span></h2>
-          <p>A showcase of testing practices and tools used to improve application reliability, coverage, and confidence.</p>
-        </div>
+    <section id="services">
+      <div class="section-heading reveal">
+        <div class="eyebrow">What I Explore</div>
+        <h2>Testing with a <span class="gradient-text">purpose.</span></h2>
+        <p>Practical quality engineering concepts for more reliable software.</p>
+      </div>
 
-        <div class="features-grid">
-          <article class="feature-card reveal">
-            <div class="feature-icon">⌕</div>
-            <h3>Manual Testing</h3>
-            <p>Validate user journeys, explore edge cases, verify requirements, and identify unexpected application behaviour.</p>
-          </article>
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <div class="feature-icon">⌘</div>
+          <h3>Automation Testing</h3>
+          <p>Selenium, Python, browser automation and repeatable regression workflows.</p>
+        </article>
 
-          <article class="feature-card reveal">
-            <div class="feature-icon">⚙</div>
-            <h3>Test Automation</h3>
-            <p>Use browser automation concepts to create repeatable checks and reduce repetitive testing effort.</p>
-          </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">◈</div>
+          <h3>Manual Testing</h3>
+          <p>Test scenarios, test cases, requirements validation and exploratory testing.</p>
+        </article>
 
-          <article class="feature-card reveal">
-            <div class="feature-icon">⌘</div>
-            <h3>API Testing</h3>
-            <p>Validate service responses, status codes, request data, and expected API behaviour.</p>
-          </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">⌁</div>
+          <h3>API Testing</h3>
+          <p>Request and response validation, status codes and functional API checks.</p>
+        </article>
 
-          <article class="feature-card reveal">
-            <div class="feature-icon">◈</div>
-            <h3>Bug Reporting</h3>
-            <p>Document reproducible issues with clear steps, expected results, actual results, and severity.</p>
-          </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">✳</div>
+          <h3>AI in QA</h3>
+          <p>Experimenting with AI-assisted bug triage and test workflow improvements.</p>
+        </article>
 
-          <article class="feature-card reveal">
-            <div class="feature-icon">▤</div>
-            <h3>Test Documentation</h3>
-            <p>Organise test scenarios, test cases, execution results, and regression testing evidence.</p>
-          </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">▤</div>
+          <h3>Test Documentation</h3>
+          <p>Structured test evidence, defect details and clear reporting.</p>
+        </article>
 
-          <article class="feature-card reveal">
-            <div class="feature-icon">✳</div>
-            <h3>AI-Assisted QA</h3>
-            <p>Explore AI-assisted approaches to test design, issue analysis, validation, and reporting workflows.</p>
-          </article>
-        </div>
+        <article class="feature-card reveal">
+          <div class="feature-icon">↗</div>
+          <h3>Continuous Learning</h3>
+          <p>Building projects and improving software testing skills through practice.</p>
+        </article>
       </div>
     </section>
 
-    <section class="workflow-section" id="workflow">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-kicker">The process</div>
-          <h2>A structured <span class="gradient-text">QA workflow.</span></h2>
-          <p>Quality starts with understanding requirements and continues through validation, reporting, and improvement.</p>
-        </div>
+    <section id="process">
+      <div class="section-heading reveal">
+        <div class="eyebrow">The Workflow</div>
+        <h2>From requirements to <span class="gradient-text">confidence.</span></h2>
+      </div>
 
-        <div class="workflow-grid">
-          <article class="workflow-step reveal">
-            <div class="step-number">01 / ANALYSE</div>
-            <h3>Understand Requirements</h3>
-            <p>Review requirements, acceptance criteria, and expected application behaviour.</p>
-          </article>
-
-          <article class="workflow-step reveal">
-            <div class="step-number">02 / DESIGN</div>
-            <h3>Prepare Test Cases</h3>
-            <p>Create scenarios covering core functionality, edge cases, and negative paths.</p>
-          </article>
-
-          <article class="workflow-step reveal">
-            <div class="step-number">03 / EXECUTE</div>
-            <h3>Test & Validate</h3>
-            <p>Execute checks, compare expected and actual results, and record defects.</p>
-          </article>
-
-          <article class="workflow-step reveal">
-            <div class="step-number">04 / REPORT</div>
-            <h3>Share Findings</h3>
-            <p>Communicate results clearly and provide evidence to support issue resolution.</p>
-          </article>
-        </div>
+      <div class="steps-grid">
+        <article class="step-card reveal">
+          <div class="feature-icon">01</div>
+          <h3>Understand</h3>
+          <p>Review requirements and identify expected application behaviour.</p>
+        </article>
+        <article class="step-card reveal">
+          <div class="feature-icon">02</div>
+          <h3>Test</h3>
+          <p>Execute manual checks and automation scenarios where appropriate.</p>
+        </article>
+        <article class="step-card reveal">
+          <div class="feature-icon">03</div>
+          <h3>Validate</h3>
+          <p>Document results, report defects and communicate findings clearly.</p>
+        </article>
       </div>
     </section>
 
-    <section class="about-section" id="about">
-      <div class="container">
-        <div class="about-panel reveal">
-          <div class="section-kicker">About this showcase</div>
-          <h2>Making software quality <span class="gradient-text">visible.</span></h2>
+    <section id="about">
+      <div class="about-panel reveal">
+        <div>
+          <div class="eyebrow">About This Portfolio</div>
+          <h2 style="margin-top:18px">Curiosity builds better quality.</h2>
           <p>
-            VerityQA is a portfolio-style demonstration gallery for exploring software
-            testing and quality engineering. It brings video demonstrations and testing
-            concepts together in one responsive interface.
+            This portfolio brings together software testing demos and practical
+            experiments in automation, API testing and AI-assisted QA.
           </p>
-
-          <div class="about-bottom">
-            <div class="about-pills">
-              <span>Software Testing</span>
-              <span>Selenium</span>
-              <span>Python</span>
-              <span>API Testing</span>
-              <span>AI in QA</span>
-            </div>
-            <a class="btn btn-primary" href="#demos">Watch the demos ↑</a>
-          </div>
+          <p>
+            The goal is to keep learning, build useful projects and demonstrate
+            testing workflows with clear evidence.
+          </p>
         </div>
+
+        <div class="skill-list">
+          <span>Python</span>
+          <span>Selenium</span>
+          <span>Manual Testing</span>
+          <span>API Testing</span>
+          <span>SQL</span>
+          <span>Git & GitHub</span>
+          <span>Bug Reporting</span>
+          <span>Test Cases</span>
+          <span>AI-assisted QA</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-panel reveal">
+        <div class="eyebrow">Let's Connect</div>
+        <h2>Let's make software <span class="gradient-text">more reliable.</span></h2>
+        <p>
+          Interested in QA, software testing or automation? Connect with me
+          and explore the project demos above.
+        </p>
+        <a class="button button-primary" href="https://github.com/Aryanvimal464" target="_blank" rel="noopener noreferrer">
+          Visit GitHub ↗
+        </a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container footer-inner">
-      <a class="footer-brand" href="#home">Verity<span>QA</span></a>
-      <p class="footer-note">Quality Engineering Showcase · Built for the web.</p>
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#demos">Demos</a>
-        <a href="#about">About</a>
-        <a href="https://github.com/Aryanvimal464" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-      </div>
-    </div>
+    <a class="logo" href="#home">Verity<span>QA.</span></a>
+    <p>Designed for quality. Built for learning.</p>
+    <p>© <span id="year"></span> VerityQA</p>
   </footer>
 
-  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
-
   <script>
-    // Load a YouTube player only when the visitor clicks a video.
-    // This keeps the initial page lightweight and leaves all content visible.
-    const videoFrames = document.querySelectorAll(".video-frame");
+    // Play YouTube videos inside the card
+    document.querySelectorAll(".video-frame").forEach((frame) => {
+      const cover = frame.querySelector(".video-cover");
 
-    videoFrames.forEach((frame) => {
-      const placeholder = frame.querySelector(".video-placeholder");
-      const videoId = frame.dataset.videoId;
-      const title = frame.dataset.title || "QA video demonstration";
-
-      if (!placeholder || !videoId) return;
-
-      placeholder.addEventListener("click", () => {
-        // Stop any other currently playing embedded video.
-        document.querySelectorAll(".video-frame iframe").forEach((iframe) => {
-          iframe.src = "about:blank";
-          iframe.remove();
-        });
-
-        document.querySelectorAll(".video-frame").forEach((otherFrame) => {
-          const existingButton = otherFrame.querySelector(".video-placeholder");
-          if (existingButton) existingButton.style.display = "flex";
-        });
+      cover.addEventListener("click", () => {
+        const videoId = frame.dataset.video;
+        const title = frame.dataset.title;
 
         const iframe = document.createElement("iframe");
         iframe.src =
           "https://www.youtube-nocookie.com/embed/" +
           encodeURIComponent(videoId) +
-          "?autoplay=1&playsinline=1&rel=0";
+          "?autoplay=1&rel=0&playsinline=1";
+
         iframe.title = title;
-        iframe.loading = "lazy";
         iframe.allow =
           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.allowFullscreen = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
 
-        placeholder.style.display = "none";
-        frame.appendChild(iframe);
+        frame.replaceChildren(iframe);
       });
     });
 
-    // Category filters
+    // Video category filters
     const filterButtons = document.querySelectorAll(".filter-btn");
     const videoCards = document.querySelectorAll(".video-card");
-    const videoCount = document.getElementById("videoCount");
 
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
-        let visible = 0;
+        filterButtons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
 
-        filterButtons.forEach((item) => {
-          const active = item === button;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
+        const filter = button.dataset.filter;
 
         videoCards.forEach((card) => {
-          const show = filter === "all" || card.dataset.category === filter;
-          card.hidden = !show;
-          if (show) visible++;
+          card.hidden = filter !== "all" && card.dataset.category !== filter;
         });
-
-        videoCount.textContent = `Showing ${visible} demonstration${visible === 1 ? "" : "s"}`;
       });
     });
 
-    // Mobile navigation
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "✕ Close" : "☰ Menu";
-    });
-
-    navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰ Menu";
+    // Reveal animation when sections enter the screen
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
     });
 
-    // Subtle 3D tilt effect on desktop pointers
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Subtle 3D tilt on desktop
+    const tiltCard = document.getElementById("tilt-card");
 
-    if (canHover && !reduceMotion) {
-      videoCards.forEach((card) => {
-        card.addEventListener("mousemove", (event) => {
-          if (event.target.closest("iframe")) return;
+    if (window.matchMedia("(pointer: fine)").matches) {
+      tiltCard.addEventListener("mousemove", (event) => {
+        const rect = tiltCard.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-          const rect = card.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width;
-          const y = (event.clientY - rect.top) / rect.height;
-          const rotateY = (x - 0.5) * 4;
-          const rotateX = (0.5 - y) * 4;
+        tiltCard.style.animation = "none";
+        tiltCard.style.transform =
+          `rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+      });
 
-          card.style.transform =
-            `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-        });
-
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "";
-        });
+      tiltCard.addEventListener("mouseleave", () => {
+        tiltCard.style.animation = "";
+        tiltCard.style.transform = "";
       });
     }
 
-    // Reveal sections as they enter the viewport
-    const revealElements = document.querySelectorAll(".reveal");
-
-    if ("IntersectionObserver" in window && !reduceMotion) {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-
-      revealElements.forEach((element) => observer.observe(element));
-    } else {
-      revealElements.forEach((element) => element.classList.add("in-view"));
-    }
-
-    // Back-to-top button
-    const backTop = document.getElementById("backTop");
-
-    window.addEventListener("scroll", () => {
-      backTop.classList.toggle("visible", window.scrollY > 500);
-    }, { passive: true });
-
-    backTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
-    });
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
